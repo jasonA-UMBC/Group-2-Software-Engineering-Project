@@ -1,5 +1,10 @@
 import os
+from dotenv import load_dotenv
 
-token = os.environ.get("GH_TOKEN")
+load_dotenv()
+
+token = os.getenv("API_KEY")
 if not token:
-    raise ValueError("GH_TOKEN environment variable is not set.")
+    raise ValueError("API_KEY environment variable is not set.")
+else:
+    print(token)
