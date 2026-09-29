@@ -77,29 +77,29 @@ Possible service interfaces:
                          of another table
 
 ### Table 1: COURSES
-course_id           --> PK
-course_identifier   --> UNIQUE
-course_title
-course_description
-credits
-department_id       --> FK
-level
+-course_id           --> PK
+-course_identifier   --> UNIQUE
+-course_title
+-course_description
+-credits
+-department_id       --> FK
+-level
 
 ### Table 2: DEPARTMENTS
-department_id       --> PK
-school_id           --> FK
-department_name
+-department_id       --> PK
+-school_id           --> FK
+-department_name
 
 ### Table 3: SCHOOLS
-school_id           --> PK
-school_name
+-school_id           --> PK
+-school_name
 
 ### Table 4: OFFERINGS
-offering_id         --> PK
-course_id           --> FK
-term
-section
-status
+-offering_id         --> PK
+-course_id           --> FK
+-term
+-section
+-status
 
 ### Table 5: PREREQUISITES
 *note: still planning
