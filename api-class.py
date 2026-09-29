@@ -16,10 +16,10 @@ def square(num):
     return jsonify({'data': num ** 2})
 
 
-@app.route('/prereqs/<string:cl>', methods=['GET'])
-def prereq(cl):
-    data = find_all_prereqs(cl)
-    return jsonify({cl : data})
+@app.route('/prereqs/<string:CC>', methods=['GET'])
+def prereq(CC):
+    data = find_all_prereqs(CC)
+    return jsonify({CC : data})
 
 if __name__ == '__main__':              #run with debug
     app.run(debug=True)
