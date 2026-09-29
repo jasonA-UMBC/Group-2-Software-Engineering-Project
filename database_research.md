@@ -72,9 +72,10 @@ Possible service interfaces:
 
 ## 2. Schema (Draft 1)
 
-*note: PK = Primary key
-       FK = Foreign key: an attribute in one table that references PK   
-                         of another table
+*note: 
+- PK = Primary key
+- FK = Foreign key: an attribute in one table that references PK
+  of another table
 
 ### Table 1: COURSES
 - course_id           --> PK
