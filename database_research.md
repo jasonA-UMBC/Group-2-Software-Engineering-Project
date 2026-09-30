@@ -102,8 +102,16 @@ Possible service interfaces:
 - section
 - status
 
-### Table 5: PREREQUISITES
-*note: still planning
+### Table 5: PREREQUISITE_GROUPS
+This table contains a group of prereq and the courses in the group are connected by AND or OR.
+- prerequisite_group_id   --> PK
+- course_id               --> FK
+- group_operator          --> AND / OR
 
-### Table 6: DEGREE_REQUIREMENTS
-*note: still planning
+### Table 6: PREREQUISITES
+- prerequisite_id         --> PK
+- prerequisite_group_id   --> FK
+- prerequisite_course_id  --> FK (references COURSES.course_id)
+
+### Table 7: DEGREE_REQUIREMENTS
+*note: still researching data
