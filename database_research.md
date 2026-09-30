@@ -79,12 +79,14 @@ Possible service interfaces:
 
 ### Table 1: COURSES
 - course_id           --> PK
-- course_identifier   --> UNIQUE
-- course_title
+- course_identifier   --> UNIQUE (ex. EN.660.345)
+- course_prefix     (ex. EN)
+- course_title      (ex. Multidisciplinary Engineering Design 1)
 - course_description
 - credits
 - department_id       --> FK
-- level
+- level         (ex. Upper Level Undergraduation)
+- repeatable    (Boolean: yes/no)
 
 ### Table 2: DEPARTMENTS
 - department_id       --> PK
@@ -98,9 +100,14 @@ Possible service interfaces:
 ### Table 4: OFFERINGS
 - offering_id         --> PK
 - course_id           --> FK
-- term
+- term_id             --> FK
 - section
-- status
+- max_seats
+- open_seats
+- seat_available
+- instruction_mode
+- location
+- building
 
 ### Table 5: PREREQUISITE_GROUPS
 This table contains a group of prereq and the courses in the group are connected by AND or OR.
@@ -112,6 +119,7 @@ This table contains a group of prereq and the courses in the group are connected
 - prerequisite_id         --> PK
 - prerequisite_group_id   --> FK
 - prerequisite_course_id  --> FK (references COURSES.course_id)
+- negative_prerequisite   (Boolean: yes/no)
 
 ### Table 7: TERMS
 - term_id             --> PK
