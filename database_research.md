@@ -113,5 +113,12 @@ This table contains a group of prereq and the courses in the group are connected
 - prerequisite_group_id   --> FK
 - prerequisite_course_id  --> FK (references COURSES.course_id)
 
-### Table 7: DEGREE_REQUIREMENTS
+### Table 7: TERMS
+- term_id             --> PK
+- term_name           
+- start_date
+
+*note: we decided to store only courses in Intersession, Spring, Summer, and Fall 2026
+
+### Table 8: DEGREE_REQUIREMENTS
 *note: still researching data
