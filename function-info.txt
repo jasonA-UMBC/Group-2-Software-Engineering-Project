@@ -1,0 +1,17 @@
+api-class.py
+
+Function: home()
+Intended Behavior: Takes no arguments, api route is "/". Returns a json message {'data': 'hello world'}. Functions as a landing page. 
+
+Function: square(num)
+Intended Behavior: Takes 1 integer as an argument (num), api route is "/home/<int:num>". Returns a json message {'data': num ** 2}. Functions as
+a simple test for taking in an input and evaluating it independently each time. 
+
+Function: prereq(CC)
+Intended Behavior: Takes 1 string argument (CC), where CC is a class code. Api route is "/prereqs/<string:CC>". Calls find_all_prereqs(CC) to 
+find all prerequisites of the class, then returns a json message {CC : data}, where data is the list output of find_all_prereqs(CC).
+
+Function find_all_prereqs(class_code)
+Intended Behavior: Takes one string argument (class_code). No api route, as this is a helper function for prereq(). At present, simply returns 
+an array of 2 class codes. Intended behavior is a series of queries to the SQL database, identifying all prerequsites. It then returns a list of
+those prerequsites. 
