@@ -1,80 +1,65 @@
-CREATE TABLE SCHOOLS (
+-- CMSC 447 Team A - Course Catalog PostgreSQL Schema
+-- Reconstructed from the current pgAdmin schema-only export (2026-10-09).
+
+CREATE TABLE public.schools (
     school_id SERIAL PRIMARY KEY,
-    school_name VARCHAR(300) UNIQUE 
+    school_name VARCHAR(300) UNIQUE
 );
 
-CREATE TABLE DEPARTMENTS (
+CREATE TABLE public.departments (
     department_id SERIAL PRIMARY KEY,
-    school_id INTEGER,
+    school_id INTEGER REFERENCES public.schools(school_id),
     department_name VARCHAR(500),
-
-    FOREIGN KEY (school_id)
-        REFERENCES SCHOOLS(school_id),
-
     UNIQUE (school_id, department_name)
 );
 
-CREATE TABLE COURSES (
+CREATE TABLE public.courses (
     course_id SERIAL PRIMARY KEY,
-    department_id INTEGER,
+    department_id INTEGER REFERENCES public.departments(department_id),
     course_identifier VARCHAR(50) UNIQUE,
     course_prefix VARCHAR(10),
     course_title VARCHAR(250),
     course_description TEXT,
-    credits DECIMAL(4, 2),
+    credits NUMERIC(4,2),
     course_level VARCHAR(100),
-    is_repeatable BOOLEAN,
-
-    FOREIGN KEY (department_id)
-        REFERENCES DEPARTMENTS(department_id)
+    is_repeatable BOOLEAN
 );
 
-CREATE TABLE TERMS (
+CREATE TABLE public.terms (
     term_id SERIAL PRIMARY KEY,
     term_name VARCHAR(20),
     start_date DATE,
-    end_date DATE
+    end_date DATE,
+    CONSTRAINT unique_term_name UNIQUE (term_name)
 );
 
-CREATE TABLE OFFERINGS (
+CREATE TABLE public.offerings (
     offering_id SERIAL PRIMARY KEY,
-    course_id INTEGER,
-    term_id INTEGER,
+    course_id INTEGER REFERENCES public.courses(course_id),
+    term_id INTEGER REFERENCES public.terms(term_id),
     course_section VARCHAR(20),
     max_seats INTEGER,
     open_seats INTEGER,
-    seat_available INTEGER,
     instruction_method VARCHAR(50),
     course_location VARCHAR(100),
-    building VARCHAR(100),
-
-    FOREIGN KEY (course_id)
-        REFERENCES COURSES(course_id),
-    
-    FOREIGN KEY (term_id)
-        REFERENCES TERMS(term_id)
+    status VARCHAR(50),
+    waitlisted INTEGER,
+    meetings VARCHAR(200),
+    CONSTRAINT unique_course_term_section UNIQUE (course_id, term_id, course_section)
 );
 
-CREATE TABLE PREREQUISITE_GROUPS (
+CREATE TABLE public.prerequisite_groups (
     prerequisite_group_id SERIAL PRIMARY KEY,
-    course_id INTEGER,
-    group_operator VARCHAR(3),
-
-    FOREIGN KEY (course_id)
-        REFERENCES COURSES(course_id),
-
-    CHECK (group_operator IN ('AND', 'OR')) 
+    course_id INTEGER REFERENCES public.courses(course_id),
+    group_operator VARCHAR(3) CHECK (group_operator IN ('AND', 'OR')),
+    parent_group_id INTEGER REFERENCES public.prerequisite_groups(prerequisite_group_id)
 );
 
-CREATE TABLE PREREQUISITES (
+CREATE TABLE public.prerequisites (
     prerequisite_id SERIAL PRIMARY KEY,
-    prerequisite_group_id INTEGER,
-    prerequisite_course_id INTEGER,
+    prerequisite_group_id INTEGER REFERENCES public.prerequisite_groups(prerequisite_group_id),
+    prerequisite_course_id INTEGER REFERENCES public.courses(course_id),
     negative_prerequisite BOOLEAN DEFAULT FALSE,
-
-    FOREIGN KEY (prerequisite_group_id)
-        REFERENCES PREREQUISITE_GROUPS(prerequisite_group_id),
-
-    FOREIGN KEY (prerequisite_course_id)
-        REFERENCES COURSES(course_id)
+    min_grade VARCHAR(2),
+    concurrent_allowed BOOLEAN DEFAULT FALSE
 );
