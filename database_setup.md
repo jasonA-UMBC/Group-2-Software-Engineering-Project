@@ -73,7 +73,11 @@ I used some of Jason's JHU SIS API functions to retrieve course information. I a
 
 **insert_courses.py**
 
-This script is used to retrieve course information from the JHU SIS API and insert it into the PostgreSQL database.
+This script retrieves course information from the JHU SIS API and inserts it into the courses table.
+
+Note:   1. Before running the script, the department must already exist in the database.
+        2. If a course already exists, the script only updates its is_repeatable value. It does not update the other course information.
+        3. The school and department can be changed in the Python file to retrieve data from another department.
 
 ## 8. Environment Variables
 
@@ -81,11 +85,12 @@ For Python scripts that connect to PostgreSQL or the JHU API, you may need to cr
 
 The file stores information such as:
 
-- JHU API key
-- Database name
-- PostgreSQL username
-- PostgreSQL password
-- Database host and port
+API_KEY=your_jhu_api_key
+DB_NAME=course_catalog_db
+DB_USER=postgres
+DB_PASSWORD=your_password
+DB_HOST=localhost
+DB_PORT=5432
 
-Note:   Make sure the variable names match the Python scripts.
-        Do not upload `.env` file to GitHub because it contains private information.
+Note:   1. Make sure the variable names match the Python scripts.
+        2. Do not upload `.env` file to GitHub because it contains private information.
