@@ -28,12 +28,34 @@ run the command: `pip install -r database/requirements.txt`
 
 ## 4. Set Up the Tables and Data
 
+### Schema.sql
 1. Open `course_catalog_db` in pgAdmin.
 2. Open the Query Tool.
 3. Open `schema.sql` from the database folder.
 4. Run the SQL commands.
 
 This will create the tables and relationships, but it will not import any course data.
+
+### course_catalog_updated_oct9.backup
+I exported the database as a PostgreSQL .backup file so we can use the existing data without importing everything again.
+
+To restore the database:
+    1. Open pgAdmin 4 and connect to your PostgreSQL server.
+    2. Right-click Databases and select Create → Database.
+    3. Name the database course_catalog_db and click Save.
+    4. Right-click course_catalog_db and select Restore.
+    5. Under General, select the .backup file I shared.
+    6. Set the format to Custom.
+    7. Under Data Options, make sure both schema and data are included.
+    8. Click Restore and wait until the process finishes.
+
+You can also open the Query Tool and run:
+
+    SELECT COUNT(*) FROM courses;
+
+If the backup contains the same data as my current database, it should return 566 courses.
+
+Note:   You do not need to run schema.sql if you restore the full backup.
 
 ## 5. Database Tables
 
