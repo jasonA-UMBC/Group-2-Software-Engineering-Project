@@ -1,7 +1,10 @@
-api-class.py
+api-class.py 
 
 Function: home()
-Intended Behavior: Takes no arguments, api route is "/". Returns a json message {'data': 'hello world'}. Functions as a landing page. 
+Intended behavior: Queries the SQL database, and returns a json list of schools.
+
+Function: sampleclasses()
+Intended behavior: Queries the SQL database, returns a sample of several dozen classes, with all information
 
 Function: square(num)
 Intended Behavior: Takes 1 integer as an argument (num), api route is "/home/<int:num>". Returns a json message {'data': num ** 2}. Functions as
