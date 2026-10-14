@@ -19,4 +19,3 @@ if "%API_Key%"=="" (
 > ".env" (
     echo API_KEY=%API_Key%
 )
-
